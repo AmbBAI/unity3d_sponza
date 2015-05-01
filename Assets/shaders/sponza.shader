@@ -37,8 +37,56 @@
 			half4 alpha = tex2D (_AlphaMaskTex, IN.uv_AlphaMaskTex);
 			if (alpha.b < 0.3) clip(-0.1);
 
-			o.Specular = _Specular / 32.;
+			o.Specular = _Specular / 32.0;
+			o.Gloss = 1.0;
 			_SpecColor.rgb = tex2D(_SpecTex, IN.uv_SpecTex);
+		}
+
+		inline fixed4 LightingBlinnPhongSpec (SurfaceOutput s, fixed3 lightDir, half3 viewDir, fixed atten)
+		{
+			half3 h = normalize (lightDir + viewDir);
+			
+			fixed diff = max (0, dot (s.Normal, lightDir));
+			
+			float nh = max (0, dot (s.Normal, h));
+			float spec = pow (nh, s.Specular * 128.0f) * s.Gloss;
+			
+			fixed4 c;
+			c.rgb = (_LightColor0.rgb * _SpecColor.rgb * spec) * (atten * 2);
+			c.a = s.Alpha + _LightColor0.a * _SpecColor.a * spec * atten;
+			return c;
+		}
+
+		inline fixed4 LightingNormal (SurfaceOutput s, fixed3 lightDir, half3 viewDir, fixed atten)
+		{
+			fixed4 c;
+			c.rgb = s.Normal;
+			c.a = s.Alpha;
+			return c;
+		}
+
+		inline fixed4 LightingView (SurfaceOutput s, fixed3 lightDir, half3 viewDir, fixed atten)
+		{
+			fixed4 c;
+			c.rgb = viewDir;
+			c.a = s.Alpha;
+			return c;
+		}
+
+		inline fixed4 LightingLight (SurfaceOutput s, fixed3 lightDir, half3 viewDir, fixed atten)
+		{
+			fixed4 c;
+			c.rgb = lightDir;
+			c.a = s.Alpha;
+			return c;
+		}
+
+		inline fixed4 LightingAtten (SurfaceOutput s, fixed3 lightDir, half3 viewDir, fixed atten)
+		{
+			fixed4 c;
+			c.rgb = fixed3(atten, atten, atten) / 2.f;
+			c.a = s.Alpha;
+			return c;
 		}
 		ENDCG
 	} 
