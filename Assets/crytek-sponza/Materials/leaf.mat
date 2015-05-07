@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: leaf
-  m_Shader: {fileID: 4800000, guid: 6b444a4e7f6190746ad7475be3b6dc1d, type: 3}
+  m_Shader: {fileID: 4800000, guid: 9b77bb9f60ba2f44eb382b8483819f29, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -18,20 +18,6 @@ Material:
           name: _MainTex
         second:
           m_Texture: {fileID: 2800000, guid: 815548151a239064a9e148c4191126ee, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _AlphaMask
-        second:
-          m_Texture: {fileID: 2800000, guid: 5efefa3744d9d6040b7ffee37992583b, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _MaskTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 5efefa3744d9d6040b7ffee37992583b, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -55,7 +41,25 @@ Material:
           m_Texture: {fileID: 2800000, guid: 5efefa3744d9d6040b7ffee37992583b, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _AlphaMask
+        second:
+          m_Texture: {fileID: 2800000, guid: 5efefa3744d9d6040b7ffee37992583b, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MaskTex
+        second:
+          m_Texture: {fileID: 2800000, guid: 5efefa3744d9d6040b7ffee37992583b, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
+      data:
+        first:
+          name: _Cutoff
+        second: .5
       data:
         first:
           name: _Specular

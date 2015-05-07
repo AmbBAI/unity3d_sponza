@@ -4,7 +4,6 @@
 		_BumpTex ("Bump Tex", 2D) = "bump" {}
 		_SpecTex ("Spec Tex", 2D) = "black" {}
 		_Specular ("Specular", Range(0., 50.)) = 10.
-		_AlphaMaskTex ( "Alpha Mask", 2D) = "white" {}
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -18,13 +17,11 @@
 		sampler2D _BumpTex;
 		sampler2D _SpecTex;
 		fixed _Specular;
-		sampler2D _AlphaMaskTex;
 
 		struct Input {
 			float2 uv_MainTex;
 			float2 uv_BumpTex;
 			float2 uv_SpecTex;
-			float2 uv_AlphaMaskTex;
 		};
 
 		void surf (Input IN, inout SurfaceOutput o) {
@@ -33,9 +30,6 @@
 			o.Alpha = c.a;
 
 			o.Normal = UnpackNormal(tex2D(_BumpTex, IN.uv_BumpTex));
-
-			half4 alpha = tex2D (_AlphaMaskTex, IN.uv_AlphaMaskTex);
-			if (alpha.b < 0.3) clip(-0.1);
 
 			o.Specular = _Specular / 32.0;
 			o.Gloss = 1.0;
